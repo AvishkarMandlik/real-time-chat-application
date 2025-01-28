@@ -10,7 +10,7 @@ const RoomList = () => {
     // Fetch rooms from the backend
     const fetchRooms = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/rooms');
+        const response = await axios.get('https://real-time-chat-app-7gqk.onrender.com/rooms');
         setRooms(response.data);
       } catch (error) {
         console.error('Error fetching rooms:', error);

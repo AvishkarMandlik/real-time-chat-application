@@ -14,7 +14,7 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/register', {
+      const response = await axios.post('https://real-time-chat-app-7gqk.onrender.com/api/register', {
         username,
         password,
       });

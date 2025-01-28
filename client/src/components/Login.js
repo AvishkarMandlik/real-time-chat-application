@@ -16,7 +16,7 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/login', { username, password });
+      const response = await axios.post('https://real-time-chat-app-7gqk.onrender.com/api/login', { username, password });
       setMessage('Login successful!');
       
       localStorage.setItem('username', username);

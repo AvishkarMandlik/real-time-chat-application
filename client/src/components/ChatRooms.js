@@ -5,7 +5,7 @@ import Chat from './Chat';
 import OnlineUsers from './OnlineUsers';
 import Logout from "./Logout";
 
-const socket = io('http://localhost:5000');
+const socket = io('https://real-time-chat-app-7gqk.onrender.com');
 
 const ChatRooms = (onLogout) => {
   const { roomId } = useParams();
