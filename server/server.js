@@ -15,9 +15,16 @@ connectDB();
 
 const app = express();
 const server = http.createServer(app);
+app.use(
+  cors({
+    origin: "https://real-time-chat-application-iota-opal.vercel.app", 
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 const io = new Server(server, {
   cors: {
-    origin: '*',
+    origin: 'https://real-time-chat-application-iota-opal.vercel.app',
     methods: ['GET', 'POST']
   },
 });
