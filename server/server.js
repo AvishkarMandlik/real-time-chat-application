@@ -60,6 +60,14 @@ io.on('connection', (socket) => {
     io.to(room).emit('chatMessage', newMessage);
   });
 
+  socket.on('typing', ({ username, room }) => {
+    socket.to(room).emit('userTyping', `${username} is typing...`);
+  });
+
+  socket.on('stopTyping', ({ room }) => {
+    socket.to(room).emit('userStoppedTyping');
+  });
+
   socket.on('leaveRoom', ({ username, room }) => {
     socket.leave(room);
 
