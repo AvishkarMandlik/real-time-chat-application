@@ -89,7 +89,7 @@ const ChatRooms = (onLogout) => {
 
     {/* Logout Button (Styled like Leave Room) */}
     <div className="text-center mt-4">
-      <button className='btn btn-danger' onClick={onLogout}>
+      <button className='btn btn-danger' onLogout={onLogout}>
         <Logout />
       </button>
     </div>
