@@ -22,7 +22,7 @@ exports.createMessage = async (req, res) => {
   }
 
   try {
-    const newMessage = new Message({ room, username, message });
+    const newMessage = new Message({ room, username, message, timestamp: new Date() });
     await newMessage.save();
     res.status(201).json({ message: 'Message sent successfully', data: newMessage });
   } catch (error) {
