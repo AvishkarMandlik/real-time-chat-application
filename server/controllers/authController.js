@@ -38,20 +38,34 @@ const registerUser = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
-
-
-
+// {
+//   "username":"Avi",
+//   "email":"mandliwek@gmail.com",
+//   "password":"123"
+// }
 
 const loginUser = async (req, res) => {
-  const { username, password } = req.body;
+  const { usernameOrEmail, password } = req.body;
 
   try {
-    const user = await User.findOne({ username });
-    if (!user || user.password !== password) return res.status(401).json({ message: 'Invalid credentials' });
+    // Find user by either username or email
+    const user = await User.findOne({
+      $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
+    });
 
-    res.status(200).json({ message: 'Login successful', user });
+    // console.log("Login attempt for:", usernameOrEmail);
+    // console.log("User found:", user);
+
+    if (!user) return res.status(401).json({ message: "Invalid Username or Email" });
+
+    // Compare hashed password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(401).json({ message: "Invalid Password" });
+
+    res.status(200).json({ message: "Login successful", user });
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
+    console.error("Login error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
