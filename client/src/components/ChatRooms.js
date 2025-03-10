@@ -79,7 +79,7 @@ const ChatRooms = (onLogout) => {
       {/* Online Users Section */}
       <div className="col-md-4">
         <div className="card shadow">
-          <div className="card-header text-center">Online Users</div>
+          <div className="card-header text-center+">Online Users</div>
           <div className="card-body">
             <OnlineUsers users={onlineUsers} />
           </div>
