@@ -14,10 +14,10 @@ const CreateRoom = () => {
     }
 
     try {
-      const response = await axios.post('https://real-time-chat-app-7gqk.onrender.com/rooms', { name: roomName });
+      const response = await axios.post('http://localhost:5000/rooms', { name: roomName });
       alert('Room created successfully!');
-      setRoomName(''); // Clear the input
-      navigate(`/rooms/${response.data.room.name}`); // Redirect to the created room
+      setRoomName('');
+      navigate(`/rooms/${response.data.room.name}`);
     } catch (error) {
       console.error('Error creating room:', error);
       setError(error.response?.data?.message || 'Failed to create room');
@@ -25,28 +25,36 @@ const CreateRoom = () => {
   };
 
   return (
-<div className="d-flex justify-content-center align-items-center vh-100">
-  <div className="container p-4 shadow rounded" style={{ maxWidth: "400px", border: "1px solid #ddd" }}>
-    <h2 className="text-center mb-4">Create a New Chat Room</h2>
-    <div className="input-group mb-3">
-      <input
-        type="text"
-        className="form-control"
-        placeholder="Enter room name"
-        value={roomName}
-        onChange={(e) => {
-          setRoomName(e.target.value);
-          setError(''); // Clear error on input change
-        }}
-      />
-      <button className="btn btn-success" onClick={createRoom}>
-        Create Room
-      </button>
+    <div className="d-flex vh-100 justify-content-center align-items-center" style={{ backgroundColor: '#1a1a1a' }}>
+      <div className="container p-4 rounded" style={{ maxWidth: '400px', backgroundColor: '#262626' }}>
+        <h2 className="text-center mb-4" style={{ color: '#ff4d4d' }}>Create a New Chat Room</h2>
+        <div className="mb-3">
+          <label htmlFor="roomName" className="form-label" style={{ color: '#fff' }}>
+            Room Name
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="roomName"
+            value={roomName}
+            onChange={(e) => {
+              setRoomName(e.target.value);
+              setError('');
+            }}
+            placeholder="Enter room name"
+            style={{ backgroundColor: '#fff', color: '#000', border: '1px solid #ddd' }}
+          />
+        </div>
+        <button
+          className="btn w-100 mb-3"
+          onClick={createRoom}
+          style={{ backgroundColor: '#ff4d4d', color: '#fff', border: 'none' }}
+        >
+          Create Room
+        </button>
+        {error && <p className="text-center" style={{ color: '#ff4d4d' }}>{error}</p>}
+      </div>
     </div>
-    {error && <p className="text-danger text-center">{error}</p>}
-  </div>
-</div>
-
   );
 };
 
