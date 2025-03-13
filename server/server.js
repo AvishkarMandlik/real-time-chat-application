@@ -17,14 +17,16 @@ const app = express();
 const server = http.createServer(app);
 app.use(
   cors({
-    origin: "https://real-time-chat-application-iota-opal.vercel.app", 
+    // origin: "https://real-time-chat-application-iota-opal.vercel.app", 
+    origin: "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
 const io = new Server(server, {
   cors: {
-    origin: 'https://real-time-chat-application-iota-opal.vercel.app',
+    // origin: 'https://real-time-chat-application-iota-opal.vercel.app',
+    origin: 'http://localhost:3000',
     methods: ['GET', 'POST']
   },
 });

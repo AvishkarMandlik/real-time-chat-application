@@ -38,11 +38,7 @@ const registerUser = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
-// {
-//   "username":"Avi",
-//   "email":"mandliwek@gmail.com",
-//   "password":"123"
-// }
+
 
 const loginUser = async (req, res) => {
   const { usernameOrEmail, password } = req.body;
