@@ -16,7 +16,8 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post('https://real-time-chat-app-7gqk.onrender.com/api/login', {
+      // const response = await axios.post('https://real-time-chat-app-7gqk.onrender.com/api/login', {
+        const response = await axios.post('http://localhost:5000/api/auth/login', {
         username,
         password,
       });
