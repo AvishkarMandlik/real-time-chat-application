@@ -99,5 +99,37 @@ io.on('connection', (socket) => {
   });
 });
 
+
+io.on('connection', (socket) => {
+  console.log('New user connected:', socket.id);
+
+  socket.on('joinRoom', ({ username, room }) => {
+      socket.join(room);
+      io.to(room).emit('onlineUsers', `${username} joined`);
+
+      // Notify existing users to start WebRTC signaling
+      socket.broadcast.to(room).emit('userJoined', { id: socket.id, username });
+  });
+
+  socket.on('offer', ({ offer, to }) => {
+      io.to(to).emit('offer', { offer, from: socket.id });
+  });
+
+  socket.on('answer', ({ answer, to }) => {
+      io.to(to).emit('answer', { answer, from: socket.id });
+  });
+
+  socket.on('candidate', ({ candidate, to }) => {
+      io.to(to).emit('candidate', { candidate, from: socket.id });
+  });
+
+  socket.on('disconnect', () => {
+      console.log('User disconnected:', socket.id);
+      io.emit('userLeft', socket.id);
+  });
+});
+
+
+
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
