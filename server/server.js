@@ -15,18 +15,18 @@ connectDB();
 
 const app = express();
 const server = http.createServer(app);
+
+const allowedOrigins = ['http://localhost:3000', 'https://real-time-chat-app-7gqk.onrender.com'];
 app.use(
   cors({
-    // origin: "https://real-time-chat-application-iota-opal.vercel.app", 
-    origin: "http://localhost:3000",
+    origin: allowedOrigins,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
 const io = new Server(server, {
   cors: {
-    // origin: 'https://real-time-chat-application-iota-opal.vercel.app',
-    origin: 'http://localhost:3000',
+    origin: allowedOrigins,
     methods: ['GET', 'POST']
   },
 });
