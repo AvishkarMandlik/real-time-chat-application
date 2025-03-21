@@ -4,29 +4,29 @@ import { useNavigate, Link } from 'react-router-dom';
 import illustration from '../assets/video-call-1-72.png';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [usernameOrEmail, setUsernameOrEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    if (!username.trim() || !password.trim()) {
+    if (!usernameOrEmail.trim() || !password.trim()) {
       setMessage('Please fill in all fields.');
       return;
     }
 
     try {
-      // const response = await axios.post('https://real-time-chat-app-7gqk.onrender.com/api/login', {
-        const response = await axios.post('http://localhost:5000/api/auth/login', {
-        username,
+      // const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post('https://real-time-chat-app-7gqk.onrender.com/api/auth/login', {
+        usernameOrEmail,
         password,
       });
+      console.log('Login response:', response.data);
       setMessage('Login successful!');
 
-      localStorage.setItem('username', username);
+      localStorage.setItem('username', response.data.user.username);
       setTimeout(() => {
-        console.log('Username before navigating:', username);
-        navigate(`/rooms/`, { state: { username } });
+        navigate('/rooms/', { state: { username: response.data.user.username } });
       }, 1000);
     } catch (error) {
       setMessage(error.response?.data?.message || 'Login failed.');
@@ -54,16 +54,16 @@ const Login = () => {
             Login
           </h2>
           <div className="mb-3">
-            <label htmlFor="username" className="form-label" style={{ color: '#fff' }}>
-              Username
+            <label htmlFor="usernameOrEmail" className="form-label" style={{ color: '#fff' }}>
+              Username or Email
             </label>
             <input
               type="text"
               className="form-control"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter your username"
+              id="usernameOrEmail"
+              value={usernameOrEmail}
+              onChange={(e) => setUsernameOrEmail(e.target.value)}
+              placeholder="Enter your username or email"
               style={{ backgroundColor: '#fff', color: '#000', border: '1px solid #ddd' }}
             />
           </div>
