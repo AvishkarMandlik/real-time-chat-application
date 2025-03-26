@@ -16,7 +16,7 @@ connectDB();
 const app = express();
 const server = http.createServer(app);
 
-const allowedOrigins = ['http://localhost:3000', 'https://real-time-chat-app-7gqk.onrender.com'];
+const allowedOrigins = ['http://localhost:3000', 'https://real-time-chat-application-git-main-avishkar-mandliks-projects.vercel.app/'];
 app.use(
   cors({
     origin: allowedOrigins,
