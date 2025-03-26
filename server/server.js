@@ -33,7 +33,7 @@ const io = new Server(server, {
 
 app.use(express.json());
 
-app.use('/api/auth', require('./routes/authRoutes'));
+// app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/rooms', roomRoutes);
 app.use('/messages', messageRoutes);
 app.use('/api', authRoutes);
