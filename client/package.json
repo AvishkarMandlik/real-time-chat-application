@@ -42,5 +42,7 @@
   },
   "devDependencies": {
     "ajv": "^7.2.4"
-  }
+  },
+"proxy": "https://real-time-chat-app-7gqk.onrender.com"
+ 
 }
