@@ -14,7 +14,7 @@ const CreateRoom = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/rooms', { name: roomName });
+      const response = await axios.post('https://real-time-chat-app-7gqk.onrender.com/rooms', { name: roomName });
       alert('Room created successfully!');
       setRoomName('');
       navigate(`/rooms/${response.data.room.name}`);
